@@ -1,4 +1,4 @@
-@page "/myorders/{orderId :int}"
+@page "/myorders/{orderId:int}"
 @inject NavigationManager NavigationManager
 @inject HttpClient HttpClient
 
@@ -41,7 +41,7 @@
                           <strong>
                               @(pizza.Size)"
                               @pizza.Special.Name
-                              (R@pizza.GetFormattedTotalPrice())
+                              (@pizza.GetFormattedTotalPrice())
                           </strong>
                       </p>
                   }
@@ -52,7 +52,7 @@
 </div>
 
 @code {
-    [Parameter] public int OrderId { get; set; }
+    [Parameter] public int orderId { get; set; }
 
     OrderWithStatus orderWithStatus;
     bool invalidOrder = false;
@@ -62,7 +62,7 @@
       try
       {
           orderWithStatus = await HttpClient.GetFromJsonAsync<OrderWithStatus>(
-              $"{NavigationManager.BaseUri}orders/{OrderId}");
+              $"{NavigationManager.BaseUri}orders/{orderId}");
       }
       catch (Exception ex)
       {
